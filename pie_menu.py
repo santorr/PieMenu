@@ -160,10 +160,6 @@ class PIE_MT_create(bpy.types.Menu):
         col.operator("mesh.primitive_cone_add", text='Cone', icon='MESH_CONE')   # Cone
         col.operator("mesh.primitive_torus_add", text='Torus', icon='MESH_TORUS')   # Torus
 
-        col = pie.column()
-        col.separator()
-        col.label(text='Lights')
-
 
 # VISUALIZATION MENU
 class PIE_MT_overlay(bpy.types.Menu):
