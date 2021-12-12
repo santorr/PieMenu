@@ -96,6 +96,17 @@ class PIE_MT_transform(bpy.types.Menu):
         pie.operator('transform.select_orientation', text='Cursor', icon='ORIENTATION_CURSOR').orientation = 'CURSOR'
 
 
+class PIE_MT_object(bpy.types.Menu):
+    bl_label = 'Object'
+
+    def draw(self, context):
+        layout = self.layout
+        pie = layout.menu_pie()
+
+        ''' Set pivot point '''
+        pie.operator('custom_pie.pivot', text='Set pivot point', icon='VERTEXSEL')
+
+
 # EDIT MENU
 class PIE_MT_edit(bpy.types.Menu):
     bl_label = 'Edit'
@@ -183,10 +194,13 @@ class PIE_MT_pie(bpy.types.Menu):
         layout = self.layout
         pie = layout.menu_pie()
 
+        column = pie.column()
+        column.operator('wm.call_menu_pie', text='Edit Mode', icon='CUBE').name = 'PIE_MT_edit'
+        column.operator('wm.call_menu_pie', text='Object Mode', icon='CUBE').name = 'PIE_MT_object'
+
         pie.operator('wm.call_menu_pie', text='View', icon='VIEW_CAMERA').name = 'PIE_MT_view'
         pie.operator('wm.call_menu_pie', text='Modifier', icon='MODIFIER_ON').name = 'PIE_MT_modifier'
         pie.operator('wm.call_menu_pie', text='Overlay', icon='OVERLAY').name = 'PIE_MT_overlay'
         pie.operator('wm.call_menu_pie', text='Create', icon='MATCUBE').name = 'PIE_MT_create'
         pie.operator('wm.call_menu_pie', text='Snap', icon='SNAP_ON').name = 'PIE_MT_snap'
-        pie.operator('wm.call_menu_pie', text='Edit', icon='CUBE').name = 'PIE_MT_edit'
         pie.operator('wm.call_menu_pie', text='Transform', icon='EMPTY_AXIS').name = 'PIE_MT_transform'

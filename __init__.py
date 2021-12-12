@@ -1,13 +1,3 @@
-import sys
-import importlib
-import bpy
-
-from .settings import PIE_PT_setting_pie
-from .pie_menu import PIE_OT_SnapTarget, PIE_OT_SnapElement, PIE_MT_modifier, \
-    PIE_MT_view, PIE_MT_snap, PIE_MT_transform, PIE_MT_edit, PIE_MT_create, \
-    PIE_MT_overlay, PIE_MT_pie
-
-
 bl_info = {
     'name': 'Pie Menu',
     'description': 'A pie menu to help production',
@@ -21,11 +11,37 @@ bl_info = {
     'category': 'Custom',
 }
 
+import bpy
+
+from .settings import PIE_PT_setting_pie
+from .pie_menu import PIE_OT_SnapTarget, \
+    PIE_OT_SnapElement, \
+    PIE_MT_modifier, \
+    PIE_MT_view, \
+    PIE_MT_snap, \
+    PIE_MT_transform, \
+    PIE_MT_edit, \
+    PIE_MT_object, \
+    PIE_MT_create, \
+    PIE_MT_overlay, \
+    PIE_MT_pie
+from .pie_pivot_point import CUSTOMPIE_OT_pivot_point
+
+
 modules_class = [
-    PIE_OT_SnapTarget, PIE_OT_SnapElement, PIE_MT_modifier, PIE_MT_view,
-    PIE_MT_snap, PIE_MT_transform, PIE_MT_edit, PIE_MT_create,
-    PIE_MT_overlay, PIE_MT_pie,
-    PIE_PT_setting_pie
+    PIE_OT_SnapTarget,
+    PIE_OT_SnapElement,
+    PIE_MT_modifier,
+    PIE_MT_view,
+    PIE_MT_snap,
+    PIE_MT_transform,
+    PIE_MT_edit,
+    PIE_MT_object,
+    PIE_MT_create,
+    PIE_MT_overlay,
+    PIE_MT_pie,
+    PIE_PT_setting_pie,
+    CUSTOMPIE_OT_pivot_point
 ]
 modulesNames = ['pie_menu', 'settings']
 addonKeymap = []
