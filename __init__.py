@@ -26,6 +26,7 @@ from .pie_menu import PIE_OT_SnapTarget, \
     PIE_MT_overlay, \
     PIE_MT_pie
 from .pie_pivot_point import CUSTOMPIE_OT_pivot_point
+from .pie_clean_normals import CUSTOMPIE_OT_clean_normals
 
 
 modules_class = [
@@ -41,8 +42,10 @@ modules_class = [
     PIE_MT_overlay,
     PIE_MT_pie,
     PIE_PT_setting_pie,
-    CUSTOMPIE_OT_pivot_point
+    CUSTOMPIE_OT_pivot_point,
+    CUSTOMPIE_OT_clean_normals
 ]
+
 modulesNames = ['pie_menu', 'settings']
 addonKeymap = []
 

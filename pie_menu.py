@@ -105,6 +105,7 @@ class PIE_MT_object(bpy.types.Menu):
 
         ''' Set pivot point '''
         pie.operator('custom_pie.pivot', text='Set pivot point', icon='VERTEXSEL')
+        pie.operator('custom_pie.clean_normals', text='Clean normals', icon='VERTEXSEL')
 
 
 # EDIT MENU
