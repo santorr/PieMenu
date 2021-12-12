@@ -29,23 +29,8 @@ class PIE_OT_SnapElement(bpy.types.Operator):
         return {'FINISHED'}
 
 
-# MODIFIER
-class PIE_MT_modifier(bpy.types.Menu):
-    bl_label = 'Modifier'
-
-    def draw(self, context):
-        layout = self.layout
-        pie = layout.menu_pie()
-
-        pie.operator('object.modifier_add', text='Weighted normal', icon='MOD_NORMALEDIT').type = 'WEIGHTED_NORMAL'
-        pie.operator('object.modifier_add', text='Bevel', icon='MOD_BEVEL').type = 'BEVEL'
-        pie.operator('object.modifier_add', text='Mirror', icon='MOD_MIRROR').type = 'MIRROR'
-        pie.operator('object.modifier_add', text='Boolean', icon='MOD_BOOLEAN').type = 'BOOLEAN'
-        pie.operator('object.modifier_add', text='Array', icon='MOD_ARRAY').type = 'ARRAY'
-
-
-# VIEW
 class PIE_MT_view(bpy.types.Menu):
+    """ Pie menu class to add a 'View' category to change te vew direction (left, right, bottom, top, front, back) """
     bl_label = 'View'
 
     def draw(self, context):
@@ -60,8 +45,8 @@ class PIE_MT_view(bpy.types.Menu):
         pie.operator('view3d.view_axis', text='Back').type = 'BACK'
 
 
-# SNAP
 class PIE_MT_snap(bpy.types.Menu):
+    """ Pie menu class to change snap settings """
     bl_label = 'Snap'
 
     def draw(self, context):
@@ -97,6 +82,7 @@ class PIE_MT_transform(bpy.types.Menu):
 
 
 class PIE_MT_object(bpy.types.Menu):
+    """ Pie menu class to launch some functions in object mode """
     bl_label = 'Object'
 
     def draw(self, context):
@@ -155,7 +141,7 @@ class PIE_MT_edit(bpy.types.Menu):
 
 
 class PIE_MT_create(bpy.types.Menu):
-    """ Create primitive objects """
+    """ Pie menu class to create primitive objects """
     bl_label = 'Create'
 
     def draw(self, context):
@@ -165,12 +151,12 @@ class PIE_MT_create(bpy.types.Menu):
         col = pie.column()
         col.separator()
         col.label(text='Meshes')
-        col.operator("mesh.primitive_plane_add", text='Plane', icon='MESH_PLANE')  # Plane
-        col.operator("mesh.primitive_cube_add", text='Cube', icon='MESH_CUBE')  # Cube
-        col.operator("mesh.primitive_uv_sphere_add", text='Sphere', icon='MESH_CIRCLE')    # Sphere
-        col.operator("mesh.primitive_cylinder_add", text='Cylinder', icon='MESH_CYLINDER')   # Cylinder
-        col.operator("mesh.primitive_cone_add", text='Cone', icon='MESH_CONE')   # Cone
-        col.operator("mesh.primitive_torus_add", text='Torus', icon='MESH_TORUS')   # Torus
+        col.operator("mesh.primitive_plane_add", text='Plane', icon='MESH_PLANE')
+        col.operator("mesh.primitive_cube_add", text='Cube', icon='MESH_CUBE')
+        col.operator("mesh.primitive_uv_sphere_add", text='Sphere', icon='MESH_CIRCLE')
+        col.operator("mesh.primitive_cylinder_add", text='Cylinder', icon='MESH_CYLINDER')
+        col.operator("mesh.primitive_cone_add", text='Cone', icon='MESH_CONE')
+        col.operator("mesh.primitive_torus_add", text='Torus', icon='MESH_TORUS')
 
 
 # VISUALIZATION MENU
@@ -195,12 +181,9 @@ class PIE_MT_pie(bpy.types.Menu):
         layout = self.layout
         pie = layout.menu_pie()
 
-        column = pie.column()
-        column.operator('wm.call_menu_pie', text='Edit Mode', icon='CUBE').name = 'PIE_MT_edit'
-        column.operator('wm.call_menu_pie', text='Object Mode', icon='CUBE').name = 'PIE_MT_object'
-
+        pie.operator('wm.call_menu_pie', text='Edit Mode', icon='CUBE').name = 'PIE_MT_edit'
+        pie.operator('wm.call_menu_pie', text='Object Mode', icon='CUBE').name = 'PIE_MT_object'
         pie.operator('wm.call_menu_pie', text='View', icon='VIEW_CAMERA').name = 'PIE_MT_view'
-        pie.operator('wm.call_menu_pie', text='Modifier', icon='MODIFIER_ON').name = 'PIE_MT_modifier'
         pie.operator('wm.call_menu_pie', text='Overlay', icon='OVERLAY').name = 'PIE_MT_overlay'
         pie.operator('wm.call_menu_pie', text='Create', icon='MATCUBE').name = 'PIE_MT_create'
         pie.operator('wm.call_menu_pie', text='Snap', icon='SNAP_ON').name = 'PIE_MT_snap'

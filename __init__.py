@@ -16,7 +16,6 @@ import bpy
 from .settings import PIE_PT_setting_pie
 from .pie_menu import PIE_OT_SnapTarget, \
     PIE_OT_SnapElement, \
-    PIE_MT_modifier, \
     PIE_MT_view, \
     PIE_MT_snap, \
     PIE_MT_transform, \
@@ -32,7 +31,6 @@ from .pie_clean_normals import CUSTOMPIE_OT_clean_normals
 modules_class = [
     PIE_OT_SnapTarget,
     PIE_OT_SnapElement,
-    PIE_MT_modifier,
     PIE_MT_view,
     PIE_MT_snap,
     PIE_MT_transform,

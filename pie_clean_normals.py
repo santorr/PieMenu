@@ -10,7 +10,13 @@ class CUSTOMPIE_OT_clean_normals(bpy.types.Operator):
 
     smooth_angle: bpy.props.IntProperty(default=30, min=0, max=180, name='Smooth angle')
 
+    def initialize_selection(self, active_object, selected_objects):
+        for ob in selected_objects:
+            ob.select_set(True)
+        bpy.context.view_layer.objects.active = active_object
+
     def execute(self, context):
+        active_object = context.view_layer.objects.active
         selected_objects = bpy.context.selected_objects
 
         """ Loop over all selected objects """
@@ -46,6 +52,7 @@ class CUSTOMPIE_OT_clean_normals(bpy.types.Operator):
                 """ Deselect the current object """
                 ob.select_set(state=False)
 
+        self.initialize_selection(active_object=active_object, selected_objects=selected_objects)
         return {'FINISHED'}
 
 ##############################

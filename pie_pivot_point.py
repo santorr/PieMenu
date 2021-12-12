@@ -14,8 +14,14 @@ class CUSTOMPIE_OT_pivot_point(bpy.types.Operator):
                ), default='center/center', name='Pivot location')
     move_to_world: bpy.props.BoolProperty(default=False, name='Move object to world')
 
+    def initialize_selection(self, active_object, selected_objects):
+        for ob in selected_objects:
+            ob.select_set(True)
+        bpy.context.view_layer.objects.active = active_object
+
     def execute(self, context):
-        selected_objects = bpy.context.selected_objects
+        active_object = context.view_layer.objects.active
+        selected_objects = context.selected_objects
 
         """ Loop over all selected objects """
         for ob in selected_objects:
@@ -49,6 +55,7 @@ class CUSTOMPIE_OT_pivot_point(bpy.types.Operator):
                 """ Deselect the current object """
                 ob.select_set(state=False)
 
+        self.initialize_selection(active_object=active_object, selected_objects=selected_objects)
         return {'FINISHED'}
 
 ##############################
