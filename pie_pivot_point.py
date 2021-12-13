@@ -7,6 +7,10 @@ class CUSTOMPIE_OT_pivot_point(bpy.types.Operator):
     bl_description = "Set the pivot point to the desired location."
     bl_options = {'REGISTER', 'UNDO'}
 
+    forward_axis: bpy.props.EnumProperty(
+        items=(('x', "x", ""),
+               ('y', "y", "")
+               ), default='x', name='Forward axis')
     pivot_location: bpy.props.EnumProperty(
         items=(('center/center', "center/center", ""),
                ('center/back', "center/back", ""),
@@ -36,8 +40,11 @@ class CUSTOMPIE_OT_pivot_point(bpy.types.Operator):
                     bpy.context.scene.cursor.location = (ob.location.x, ob.location.y, ob.location.z - ob.dimensions.z/2)
 
                 """ Set the cursor location to the center/back of the object """
-                if self.pivot_location == "center/back":
-                    bpy.context.scene.cursor.location = (ob.location.x - ob.dimensions.x / 2, ob.location.y, ob.location.z)
+                if self.pivot_location == 'center/back':
+                    if self.forward_axis == 'x':
+                        bpy.context.scene.cursor.location = (ob.location.x - ob.dimensions.x / 2, ob.location.y, ob.location.z)
+                    elif self.forward_axis == 'y':
+                        bpy.context.scene.cursor.location = (ob.location.x, ob.location.y - ob.dimensions.x / 2, ob.location.z)
 
                 """ Set the cursor location to the center of the object """
                 if self.pivot_location == "center/center":
