@@ -24,6 +24,9 @@ class CUSTOMPIE_OT_clean_normals(bpy.types.Operator):
             """ Only process if the object is a visible mesh """
             if ob.type == 'MESH' and not ob.hide_get():
                 ob.select_set(state=True)
+                """ You need to set this object as active object """
+                if ob != context.view_layer.objects.active:
+                    context.view_layer.objects.active = ob
                 """ Clear existing normals """
                 bpy.ops.mesh.customdata_custom_splitnormals_clear()
                 """ Enable smooth shade """
