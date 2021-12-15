@@ -23,11 +23,13 @@ from .pie_menu import PIE_OT_SnapTarget, \
     PIE_MT_object, \
     PIE_MT_create, \
     PIE_MT_overlay, \
-    PIE_MT_pie
+    PIE_MT_pie, \
+    PIE_MT_scene
+
 from .pie_pivot_point import CUSTOMPIE_OT_pivot_point
 from .pie_clean_normals import CUSTOMPIE_OT_clean_normals
 from .pie_object_vertex_color import CUSTOMPIE_OT_vertex_color
-
+from .pie_scene_clean_materials import CUSTOMPIE_OT_clean_scene_materials
 
 modules_class = [
     PIE_OT_SnapTarget,
@@ -37,13 +39,15 @@ modules_class = [
     PIE_MT_transform,
     PIE_MT_edit,
     PIE_MT_object,
+    PIE_MT_scene,
     PIE_MT_create,
     PIE_MT_overlay,
     PIE_MT_pie,
     PIE_PT_setting_pie,
     CUSTOMPIE_OT_pivot_point,
     CUSTOMPIE_OT_clean_normals,
-    CUSTOMPIE_OT_vertex_color
+    CUSTOMPIE_OT_vertex_color,
+    CUSTOMPIE_OT_clean_scene_materials
 ]
 
 modulesNames = ['pie_menu', 'settings']

@@ -95,6 +95,18 @@ class PIE_MT_object(bpy.types.Menu):
         pie.operator('custom_pie.vertex_color', text='Set vertex color', icon='VERTEXSEL')
 
 
+class PIE_MT_scene(bpy.types.Menu):
+    """ Pie menu class to launch some functions in scene """
+    bl_label = 'Scene'
+
+    def draw(self, context):
+        layout = self.layout
+        pie = layout.menu_pie()
+
+        ''' Set pivot point '''
+        pie.operator('custom_pie.clean_scene_materials', text='Clean materials', icon='VERTEXSEL')
+
+
 # EDIT MENU
 class PIE_MT_edit(bpy.types.Menu):
     bl_label = 'Edit'
@@ -184,6 +196,7 @@ class PIE_MT_pie(bpy.types.Menu):
 
         pie.operator('wm.call_menu_pie', text='Edit Mode', icon='CUBE').name = 'PIE_MT_edit'
         pie.operator('wm.call_menu_pie', text='Object Mode', icon='CUBE').name = 'PIE_MT_object'
+        pie.operator('wm.call_menu_pie', text='Scene Mode', icon='CUBE').name = 'PIE_MT_scene'
         pie.operator('wm.call_menu_pie', text='View', icon='VIEW_CAMERA').name = 'PIE_MT_view'
         pie.operator('wm.call_menu_pie', text='Overlay', icon='OVERLAY').name = 'PIE_MT_overlay'
         pie.operator('wm.call_menu_pie', text='Create', icon='MATCUBE').name = 'PIE_MT_create'

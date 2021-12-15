@@ -12,7 +12,7 @@ class CUSTOMPIE_OT_vertex_color(bpy.types.Operator):
                                                 default=(1.0, 1.0, 1.0, 1.0), min=0.0, max=1.0)
     random_color: bpy.props.BoolProperty(default=True, name='Random color')
     blend_channels: bpy.props.BoolProperty(default=True, name='Blend channels')
-    
+
     red_channel: bpy.props.BoolProperty(default=True, name='Red')
     red_value_range: bpy.props.FloatVectorProperty(name='min/max', size=2, default=(0.0, 1.0), min=0.0, max=1.0)
 
