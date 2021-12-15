@@ -17,41 +17,52 @@ class CUSTOMPIE_OT_clean_scene_materials(bpy.types.Operator):
             self.layout.label(text=message)
         bpy.context.window_manager.popup_menu(draw, title=title, icon=icon)
 
-    def get_search_material(self, search_name):
+    def get_parent_material(self, search_name):
         """ Loop over all materials in the scene, and return a material by name, else return None """
         for material in bpy.data.materials:
             if material.name == search_name:
                 return material
         return None
 
-    def delete_materials(self):
-        """ Delete all materials in the scene that contains '.' in its name and return the list of materials. """
-        return [bpy.data.materials.remove(material) for material in bpy.data.materials if "." in material.name]
+    def delete_scene_wrong_materials(self):
+        """ Delete all materials in the scene with '.' in its name. """
+        for material in bpy.data.materials:
+            if "." in material.name:
+                bpy.data.materials.remove(material)
+
+    def delete_scene_unused_materials(self):
+        """ Delete all unused materials in the scene. """
+        for material in bpy.data.materials:
+            if not material.users:
+                bpy.data.materials.remove(material)
 
     def execute(self, context):
-        num_created_materials = 0
-        num_switch_materials = 0
-        objects = [ob for ob in bpy.data.objects if ob.type == 'MESH']
-        for ob in objects:
+        previous_selection = bpy.context.selected_objects
+        bpy.ops.object.select_all(action='DESELECT')
+        bpy.ops.object.select_by_type(type='MESH')
+        mesh_objects = bpy.context.selected_objects
+        for ob in mesh_objects:
+            """ Remove all unused slot on this material """
+            bpy.ops.object.material_slot_remove_unused()
+            """ Get all used materials """
             object_materials = ob.material_slots
             for i in range(len(object_materials)):
                 if "." in object_materials[i].name:
                     search_name = object_materials[i].name.split(".")[0]
-                    find_material = self.get_search_material(search_name)
+                    find_material = self.get_parent_material(search_name)
                     if find_material is not None:
                         object_materials[i].material = find_material
-                        num_switch_materials += 1
                     else:
                         new_material = bpy.data.materials.new(name=search_name)
                         object_materials[i].material = new_material
-                        num_created_materials += 1
 
-        num_deleted_materials = len(self.delete_materials())
+        self.delete_scene_unused_materials()
 
-        self.ShowMessageBox(message=f"{num_created_materials} material(s) created, "
-                                    f"{num_switch_materials} material(s) changed, "
-                                    f"{num_deleted_materials} material(s) deleted.",
-                            title="Clean materials")
+        bpy.ops.object.select_all(action='DESELECT')
+        for ob in previous_selection:
+            ob.select_set(True)
+
+        self.ShowMessageBox(message="Successfully clean materials.", title="Clean materials")
         return {'FINISHED'}
 
 ##############################
