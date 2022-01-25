@@ -93,6 +93,7 @@ class PIE_MT_object(bpy.types.Menu):
         pie.operator('custom_pie.pivot', text='Set pivot point', icon='VERTEXSEL')
         pie.operator('custom_pie.clean_normals', text='Clean normals', icon='VERTEXSEL')
         pie.operator('custom_pie.vertex_color', text='Set vertex color', icon='VERTEXSEL')
+        pie.operator('custom_pie.align_object_from_edge_index', text='Align object from edge index', icon='VERTEXSEL')
 
 
 class PIE_MT_scene(bpy.types.Menu):
