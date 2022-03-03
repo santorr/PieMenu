@@ -26,9 +26,9 @@ from .pie_menu import PIE_OT_SnapTarget, \
     PIE_MT_pie, \
     PIE_MT_scene
 
-from .object.pie_align_object_from_edge_index import CUSTOMPIE_OT_align_object_from_edge_index
-from .object.pie_pivot_point import CUSTOMPIE_OT_pivot_point
-from .object.pie_clean_normals import CUSTOMPIE_OT_clean_normals
+from .object.pie_object_align_object_from_edge_index import CUSTOMPIE_OT_align_object_from_edge_index
+from .object.pie_object_pivot_point import CUSTOMPIE_OT_pivot_point
+from .object.pie_object_clean_normals import CUSTOMPIE_OT_clean_normals
 from .object.pie_object_vertex_color import CUSTOMPIE_OT_vertex_color
 from .scene.pie_scene_clean_materials import CUSTOMPIE_OT_clean_scene_materials
 
