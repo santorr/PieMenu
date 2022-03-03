@@ -10,27 +10,30 @@ class CUSTOMPIE_OT_clean_scene_materials(bpy.types.Operator):
     bl_label = "Clean scene materials"
     bl_description = "Replace and remove all materials with '.' in his name."
     bl_options = {'REGISTER', 'UNDO'}
-
+    
     def ShowMessageBox(self, message="", title="title", icon='INFO'):
         """ Display a message box """
         def draw(self, context):
             self.layout.label(text=message)
         bpy.context.window_manager.popup_menu(draw, title=title, icon=icon)
 
-    def get_parent_material(self, search_name):
+    @staticmethod
+    def get_parent_material(search_name):
         """ Loop over all materials in the scene, and return a material by name, else return None """
         for material in bpy.data.materials:
             if material.name == search_name:
                 return material
         return None
 
-    def delete_scene_wrong_materials(self):
+    @staticmethod
+    def delete_scene_wrong_materials():
         """ Delete all materials in the scene with '.' in its name. """
         for material in bpy.data.materials:
             if "." in material.name:
                 bpy.data.materials.remove(material)
 
-    def delete_scene_unused_materials(self):
+    @staticmethod
+    def delete_scene_unused_materials():
         """ Delete all unused materials in the scene. """
         for material in bpy.data.materials:
             if not material.users:
@@ -64,15 +67,3 @@ class CUSTOMPIE_OT_clean_scene_materials(bpy.types.Operator):
 
         self.ShowMessageBox(message="Successfully clean materials.", title="Clean materials")
         return {'FINISHED'}
-
-##############################
-#   REGISTRATION
-##############################
-
-
-def register():
-    bpy.utils.register_class(CUSTOMPIE_OT_clean_scene_materials)
-
-
-def unregister():
-    bpy.utils.unregister_class(CUSTOMPIE_OT_clean_scene_materials)

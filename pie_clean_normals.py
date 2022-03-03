@@ -10,10 +10,20 @@ class CUSTOMPIE_OT_clean_normals(bpy.types.Operator):
 
     smooth_angle: bpy.props.IntProperty(default=30, min=0, max=180, name='Smooth angle')
 
-    def initialize_selection(self, active_object, selected_objects):
+    @staticmethod
+    def initialize_selection(active_object, selected_objects):
         for ob in selected_objects:
             ob.select_set(True)
         bpy.context.view_layer.objects.active = active_object
+
+    @classmethod
+    def poll(cls, context):
+        """
+        To get this operator enable you have to :
+        - Be in object mode
+        - One or more selected objects
+        """
+        return context.active_object != None and 'OBJECT' in context.active_object.mode and len(bpy.context.selected_objects) > 0
 
     def execute(self, context):
         active_object = context.view_layer.objects.active
@@ -57,15 +67,3 @@ class CUSTOMPIE_OT_clean_normals(bpy.types.Operator):
 
         self.initialize_selection(active_object=active_object, selected_objects=selected_objects)
         return {'FINISHED'}
-
-##############################
-#   REGISTRATION
-##############################
-
-
-def register():
-    bpy.utils.register_class(CUSTOMPIE_OT_clean_normals)
-
-
-def unregister():
-    bpy.utils.unregister_class(CUSTOMPIE_OT_clean_normals)

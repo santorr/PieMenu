@@ -18,7 +18,8 @@ class CUSTOMPIE_OT_pivot_point(bpy.types.Operator):
                ), default='center/center', name='Pivot location')
     move_to_world: bpy.props.BoolProperty(default=False, name='Move object to world')
 
-    def initialize_selection(self, active_object, selected_objects):
+    @staticmethod
+    def initialize_selection(active_object, selected_objects):
         for ob in selected_objects:
             ob.select_set(True)
         bpy.context.view_layer.objects.active = active_object
@@ -64,15 +65,3 @@ class CUSTOMPIE_OT_pivot_point(bpy.types.Operator):
 
         self.initialize_selection(active_object=active_object, selected_objects=selected_objects)
         return {'FINISHED'}
-
-##############################
-#   REGISTRATION
-##############################
-
-
-def register():
-    bpy.utils.register_class(CUSTOMPIE_OT_pivot_point)
-
-
-def unregister():
-    bpy.utils.unregister_class(CUSTOMPIE_OT_pivot_point)

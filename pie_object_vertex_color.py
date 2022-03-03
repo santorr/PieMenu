@@ -186,15 +186,3 @@ class CUSTOMPIE_OT_vertex_color(bpy.types.Operator):
                             i += 1
 
         return {'FINISHED'}
-
-##############################
-#   REGISTRATION
-##############################
-
-
-def register():
-    bpy.utils.register_class(CUSTOMPIE_OT_vertex_color)
-
-
-def unregister():
-    bpy.utils.unregister_class(CUSTOMPIE_OT_vertex_color)
