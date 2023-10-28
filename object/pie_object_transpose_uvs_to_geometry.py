@@ -36,11 +36,21 @@ class CUSTOMPIE_OT_transpose_uvs_to_geometry(bpy.types.Operator):
         bm.from_mesh(obj.data)
         bm.verts.ensure_lookup_table()
 
+        min_x = min(data, key=lambda x: x["uvs_x"])["uvs_x"]
+        max_x = max(data, key=lambda x: x["uvs_x"])["uvs_x"]
+
+        min_y = min(data, key=lambda y: y["uvs_y"])["uvs_y"]
+        max_y = max(data, key=lambda y: y["uvs_y"])["uvs_y"]
+
+        center = ((max_x - min_x)/2, (max_y - min_y)/2)
+
+        offset = (min_x + center[0], min_y + center[1])
+
         for vertex in data:
             index = vertex["index"]
             x = vertex["uvs_x"]
             y = vertex["uvs_y"]
-            world_pos = (0, x, y) if self.forward_axis == 'x' else (x, 0, y)
+            world_pos = (0, x - offset[0], y - offset[1]) if self.forward_axis == 'x' else (x - offset[0], 0, y - offset[1])
             bm.verts[index].co = world_pos
         bm.to_mesh(obj.data)
 
