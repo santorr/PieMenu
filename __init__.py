@@ -30,6 +30,7 @@ from .object.pie_object_align_object_from_edge_index import CUSTOMPIE_OT_align_o
 from .object.pie_object_pivot_point import CUSTOMPIE_OT_pivot_point
 from .object.pie_object_clean_normals import CUSTOMPIE_OT_clean_normals
 from .object.pie_object_vertex_color import CUSTOMPIE_OT_vertex_color
+from .object.pie_object_transpose_uvs_to_geometry import CUSTOMPIE_OT_transpose_uvs_to_geometry
 from .scene.pie_scene_clean_materials import CUSTOMPIE_OT_clean_scene_materials
 
 modules_class = [
@@ -49,6 +50,7 @@ modules_class = [
     CUSTOMPIE_OT_align_object_from_edge_index,
     CUSTOMPIE_OT_clean_normals,
     CUSTOMPIE_OT_vertex_color,
+    CUSTOMPIE_OT_transpose_uvs_to_geometry,
     CUSTOMPIE_OT_clean_scene_materials
 ]
 
